@@ -10,6 +10,7 @@ Este projeto utiliza Flask para criar um dashboard interativo que exibe o APPM e
 - Interface de seleção para escolher o jogo desejado.
 
 ## Estruturação do projeto
+```
 meu_projeto/
 │
 ├── app.py                     # O código principal Flask
@@ -21,7 +22,7 @@ meu_projeto/
 │   ├── index.html              # Template principal
 ├── README.md                   # Instruções de uso e documentação
 ├── requirements.txt            # Dependências do projeto
-
+```
 
 
 ## Instalação
