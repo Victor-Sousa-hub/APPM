@@ -65,9 +65,13 @@ def recupera_dados():
     try:
         elemento = driver.find_element(By.CLASS_NAME, "totalmenuLine")
         filhos = elemento.find_elements(By.XPATH, "./*")
-        filhos[1].click()
+        filho_segundo = WebDriverWait(driver, 10).until(
+                EC.visibility_of(filhos[1]) 
+            )
+
+        filho_segundo.click()
     except():
-        recupera_dados()
+        pass
 
     #Seleiona os jogos ao vivo
     games_lists = driver.find_elements(By.CLASS_NAME,'match')
@@ -76,6 +80,7 @@ def recupera_dados():
         try:
             #driver.execute_script("arguments[0].setAttribute('target', '_self');", game)
             game.click()
+            break
         except:pass
     all_windows = driver.window_handles[1:]
 
