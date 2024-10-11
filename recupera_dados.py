@@ -49,8 +49,8 @@ def recupera_dados():
 
     # Configurando opções para o Chrome
     chrome_options = Options()
-    chrome_options.add_argument("--headless")  # Ativar modo headless
-    chrome_options.add_argument("--no-sandbox")
+    #chrome_options.add_argument("--headless")  # Ativar modo headless
+    #chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")  # Para evitar problemas de memória
 
     # Inicializa o driver
