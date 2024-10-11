@@ -1,4 +1,4 @@
-# Meu Projeto de Monitoramento de APPM e Escanteios
+# Projeto de Monitoramento de APPM e Escanteios
 
 Este projeto utiliza Flask para criar um dashboard interativo que exibe o APPM e escanteios de diferentes jogos. Os dados são atualizados automaticamente a cada minuto com base em um banco de dados SQLite.
 
