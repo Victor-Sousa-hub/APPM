@@ -73,8 +73,10 @@ def recupera_dados():
     games_lists = driver.find_elements(By.CLASS_NAME,'match')
 
     for game in games_lists:
-        #driver.execute_script("arguments[0].setAttribute('target', '_self');", game)
-        game.click()
+        try:
+            #driver.execute_script("arguments[0].setAttribute('target', '_self');", game)
+            game.click()
+        except:pass
     all_windows = driver.window_handles[1:]
 
     dados = {}
