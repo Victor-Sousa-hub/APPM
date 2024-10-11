@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APPM Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #FFFFFF;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3em;
+            color: #FFFFFF;
+        }
+        #jogo-select {
+            margin-top: 100px;
+            padding: 15px;
+            font-size: 1.2em;
+            background-color: #303030;
+            color: #FFFFFF;
+            border: 1px solid #555;
+            width: 300px;
+            border-radius: 10px;
+        }
+        #graph {
+            margin-top: 20px;
+        }
+        #pressao-card {
+            margin-top: 20px;
+            background-color: #1e1e1e;
+            color: #FFFFFF;
+            padding: 20px;
+            font-size: 1.5em;
+            border-radius: 10px;
+            display: inline-block;
+            border: 2px solid #555;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>APPM Dashboard</h1>
+
+    <!-- Dropdown para selecionar o jogo -->
+    <select id="jogo-select">
+        {% for jogo in jogos %}
+            <option value="{{ jogo }}">{{ jogo }}</option>
+        {% endfor %}
+    </select>
+
+    <!-- Div onde o gráfico será exibido -->
+    <div id="graph"></div>
+
+    <script>
+        // Função para atualizar o gráfico e o card de pressão
+        function updateGraph(jogo) {
+            fetch(`/update_data?jogo=${jogo}`)
+                .then(response => response.json())
+                .then(graphJson => {
+                    var graphData = JSON.parse(graphJson);
+                    Plotly.newPlot('graph', graphData.data, graphData.layout);
+
+                });
+        }
+
+        // Atualizar o gráfico quando o jogo for selecionado
+        document.getElementById('jogo-select').addEventListener('change', function() {
+            var jogo = this.value;
+            updateGraph(jogo);
+        });
+
+        // Carregar o gráfico com o primeiro jogo ao abrir a página
+        window.onload = function() {
+            var jogoInicial = document.getElementById('jogo-select').value;
+            updateGraph(jogoInicial);
+
+            // Atualizar o gráfico automaticamente a cada 1 minuto (60000 ms)
+            setInterval(function() {
+                var jogoAtual = document.getElementById('jogo-select').value;
+                updateGraph(jogoAtual);
+            }, 60000);  // Atualiza a cada 60 segundos
+        };
+    </script>
+</body>
+</html>
